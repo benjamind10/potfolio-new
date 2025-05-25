@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const mqttStates = ['RUNNING', 'STOPPED', 'IDLE', 'ERROR'];
 
@@ -65,6 +66,33 @@ const Hero: React.FC = () => {
           >
             Contact
           </a>
+          <div className="flex items-center gap-4 ml-2 mt-1">
+            <a
+              href="https://github.com/benjamind10"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 dark:text-gray-400 hover:text-indigo-500 transition"
+              aria-label="GitHub"
+            >
+              <Github size={20} />
+            </a>
+            <a
+              href="https://linkedin.com/in/benjamin-duran-3a880a1b9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 dark:text-gray-400 hover:text-indigo-500 transition"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
+            <a
+              href="mailto:ben.duran@proton.me"
+              className="text-gray-500 dark:text-gray-400 hover:text-indigo-500 transition"
+              aria-label="Email"
+            >
+              <Mail size={20} />
+            </a>
+          </div>
         </div>
       </motion.div>
 

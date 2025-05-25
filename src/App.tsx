@@ -3,6 +3,8 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Mapp from './components/Mapp';
 import Footer from './components/Footer';
+import Experience from './components/Experience';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <main className="space-y-32">
         <Hero />
         <About />
+        <Experience />
+        <Contact />
         <Mapp />
       </main>
       <Footer />

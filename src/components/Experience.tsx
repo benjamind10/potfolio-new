@@ -13,7 +13,7 @@ const jobs = [
   {
     title: 'Software Engineer II — Fuuz',
     dates: 'Nov 2024 – Jan 2025 · Remote',
-    desc: 'Delivered scalable MES solutions using Ignition, UNS, and React.',
+    desc: 'Delivered scalable MES solutions using Typescript, Fuuz App, and React.',
     tags: 'TypeScript, React.js, +1 skill',
   },
   {

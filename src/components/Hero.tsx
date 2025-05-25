@@ -3,6 +3,20 @@ import { motion } from 'framer-motion';
 
 const mqttStates = ['RUNNING', 'STOPPED', 'IDLE', 'ERROR'];
 
+const formatMqttPayload = (state: string) => {
+  return JSON.stringify(
+    {
+      topic: 'factory/line1/machineA/state',
+      payload: {
+        timestamp: new Date().toISOString(),
+        value: state,
+      },
+    },
+    null,
+    2
+  );
+};
+
 const Hero: React.FC = () => {
   const [mqttState, setMqttState] = useState('RUNNING');
 
@@ -79,13 +93,7 @@ const Hero: React.FC = () => {
 
           {/* Code block */}
           <pre className="whitespace-pre-wrap leading-relaxed">
-            {`{
-  "topic": "factory/line1/machineA/state",
-  "payload": {
-    "timestamp": "${new Date().toISOString()}",
-    "value": "${mqttState}"
-  }
-}`}
+            {formatMqttPayload(mqttState)}
           </pre>
         </div>
       </motion.div>

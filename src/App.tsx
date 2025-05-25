@@ -1,6 +1,8 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Mapp from './components/Mapp';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -9,9 +11,9 @@ function App() {
       <main className="space-y-32">
         <Hero />
         <About />
+        <Mapp />
       </main>
-      {/* Toggle button to confirm visually */}
-      <div className="fixed bottom-4 right-4 z-50"></div>
+      <Footer />
     </div>
   );
 }

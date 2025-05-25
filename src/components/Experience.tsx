@@ -11,7 +11,7 @@ const jobs = [
     tags: 'Ignition, Industry 4.0, +5 skills',
   },
   {
-    title: 'Software Engineer — Fuuz',
+    title: 'Software Engineer II — Fuuz',
     dates: 'Nov 2024 – Jan 2025 · Remote',
     desc: 'Delivered scalable MES solutions using Ignition, UNS, and React.',
     tags: 'TypeScript, React.js, +1 skill',

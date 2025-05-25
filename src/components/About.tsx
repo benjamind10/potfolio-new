@@ -44,14 +44,16 @@ const About: React.FC = () => {
 
             {/* Skills */}
             <div className="flex flex-wrap gap-2 mt-4">
-              {['Ignition', 'MQTT', 'MSSQL', 'UNS', 'TypeScript'].map(skill => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-800 text-sm text-indigo-600 dark:text-indigo-100 font-medium"
-                >
-                  {skill}
-                </span>
-              ))}
+              {['Ignition', 'MQTT', 'MSSQL', 'UNS', 'Python', 'TypeScript'].map(
+                skill => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-800 text-sm text-indigo-600 dark:text-indigo-100 font-medium"
+                  >
+                    {skill}
+                  </span>
+                )
+              )}
             </div>
 
             {/* Resume Button */}

@@ -1,10 +1,10 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Mapp from './components/Mapp';
 import Footer from './components/Footer';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
+import Demos from './components/Demos';
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <Hero />
         <About />
         <Experience />
+        <Demos />
         <Contact />
-        <Mapp />
       </main>
       <Footer />
     </div>

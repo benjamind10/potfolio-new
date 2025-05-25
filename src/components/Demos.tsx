@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MQTTExplorer from './MQTTExplorer';
-import LogSimulator from './LogSimulator';
+// import LogSimulator from './LogSimulator';
 import UNSExplorer from './UNSExplorer';
 
 const TABS = [

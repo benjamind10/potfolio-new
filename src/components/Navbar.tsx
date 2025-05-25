@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-scroll';
-import { Sun, Moon } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
+import { Link } from 'react-scroll';
 
 const Navbar: React.FC = () => {
   const { theme, toggle } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
     { name: 'About', to: 'about' },
@@ -27,8 +28,8 @@ const Navbar: React.FC = () => {
           BD
         </Link>
 
-        {/* Nav links */}
-        <div className="flex items-center space-x-6">
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center space-x-6">
           {links.map(({ name, to }) => (
             <Link
               key={name}
@@ -37,14 +38,10 @@ const Navbar: React.FC = () => {
               offset={-96}
               duration={500}
               className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
-              activeClass="text-indigo-600 dark:text-indigo-400 font-semibold"
-              spy={true}
             >
               {name}
             </Link>
           ))}
-
-          {/* Theme toggle */}
           <button
             onClick={toggle}
             className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
@@ -53,7 +50,46 @@ const Navbar: React.FC = () => {
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
+
+        {/* Mobile menu icon */}
+        <div className="md:hidden flex items-center space-x-4">
+          <button
+            onClick={toggle}
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle Theme"
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu dropdown */}
+      {menuOpen && (
+        <div className="md:hidden px-6 pb-6 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col gap-4 mt-4">
+            {links.map(({ name, to }) => (
+              <Link
+                key={name}
+                to={to}
+                smooth={true}
+                offset={-96}
+                duration={500}
+                onClick={() => setMenuOpen(false)}
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
+              >
+                {name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

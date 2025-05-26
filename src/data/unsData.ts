@@ -1,7 +1,8 @@
 export type UnsNode = {
   name: string;
   fullPath: string;
-  payload?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload?: any;
   children?: UnsNode[];
 };
 
@@ -10,17 +11,22 @@ export const unsData: UnsNode = {
   fullPath: 'Enterprise',
   children: [
     {
-      name: 'Dallas',
-      fullPath: 'Enterprise/Dallas',
+      name: 'Richmond',
+      fullPath: 'Enterprise/Richmond',
       children: [
         {
           name: 'Press',
-          fullPath: 'Enterprise/Dallas/Press',
+          fullPath: 'Enterprise/Richmond/Press',
           children: [
             {
               name: 'Line1',
-              fullPath: 'Enterprise/Dallas/Press/Line1',
-              payload: { OEE: 0.94, Availability: 0.92 },
+              fullPath: 'Enterprise/Richmond/Press/Line1',
+              payload: {
+                OEE: 0.8565,
+                Availability: 0.92,
+                Quality: 0.98,
+                Performance: 0.95,
+              },
             },
           ],
         },

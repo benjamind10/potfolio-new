@@ -258,14 +258,14 @@ const Hero: React.FC = () => {
               </div>
             </div>
             {/* Message stream */}
-            <div className="flex flex-col gap-1.5 min-h-[96px]">
+            <div className="flex flex-col gap-1.5 h-[120px] overflow-hidden">
               <AnimatePresence initial={false}>
                 {messages.map(msg => (
                   <motion.div
                     key={msg.id}
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
+                    exit={{ opacity: 0 }}
                     transition={{ duration: shouldAnimate ? 0.3 : 0 }}
                     className="flex flex-col gap-0.5"
                   >
@@ -320,10 +320,11 @@ const Hero: React.FC = () => {
           {/* Body: gauge left, metrics right */}
           <div className="flex items-center gap-4">
             {/* SVG arc gauge */}
-            <div className="relative flex-shrink-0">
+            <div className="relative flex-shrink-0 w-[96px] h-[96px]">
               <AnimatePresence mode="wait">
                 <motion.svg
                   key={currentNode.fullPath}
+                  className="absolute inset-0"
                   width={96}
                   height={96}
                   viewBox="-50 -50 100 100"
@@ -411,33 +412,35 @@ const Hero: React.FC = () => {
             <span>uns.path</span>
           </div>
           {/* Animated breadcrumb */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentUnsNode.fullPath}
-              className="flex flex-wrap items-center gap-1 font-mono text-xs"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: shouldAnimate ? 0.35 : 0 }}
-            >
-              {pathSegments.map((seg, i) => (
-                <React.Fragment key={i}>
-                  <span
-                    className={
-                      i === pathSegments.length - 1
-                        ? 'text-indigo-300 font-semibold'
-                        : 'text-gray-400'
-                    }
-                  >
-                    {seg}
-                  </span>
-                  {i < pathSegments.length - 1 && (
-                    <span className="text-gray-600">/</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative h-5 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentUnsNode.fullPath}
+                className="absolute inset-x-0 flex flex-wrap items-center gap-1 font-mono text-xs"
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: shouldAnimate ? 0.35 : 0 }}
+              >
+                {pathSegments.map((seg, i) => (
+                  <React.Fragment key={i}>
+                    <span
+                      className={
+                        i === pathSegments.length - 1
+                          ? 'text-indigo-300 font-semibold'
+                          : 'text-gray-400'
+                      }
+                    >
+                      {seg}
+                    </span>
+                    {i < pathSegments.length - 1 && (
+                      <span className="text-gray-600">/</span>
+                    )}
+                  </React.Fragment>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
           {/* OEE payload preview */}
           <div className="flex gap-3 font-mono text-[10px] text-gray-500 mt-1">
             <span>

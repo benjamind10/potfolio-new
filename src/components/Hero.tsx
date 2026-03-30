@@ -1,38 +1,198 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ChevronDown, Wifi, Activity, GitBranch } from 'lucide-react';
+import { arc } from 'd3-shape';
+import { unsData, type UnsNode } from '../data/unsData';
 
-const mqttStates = ['RUNNING', 'STOPPED', 'IDLE', 'ERROR'];
+// --- MQTT simulation data ---
+const MQTT_TOPICS = [
+  'Enterprise/Richmond/Press/Line1/Machine1/state',
+  'Enterprise/Richmond/Press/Line2/Machine1/state',
+  'Enterprise/Richmond/Press/Line3/Machine2/state',
+  'Enterprise/Richmond/Assembly/Line1/Station1/state',
+  'Enterprise/Richmond/Assembly/Line2/Station1/state',
+];
 
-const formatMqttPayload = (state: string) => {
-  return JSON.stringify(
-    {
-      topic: 'factory/line1/machineA/state',
-      payload: {
-        timestamp: new Date().toISOString(),
-        value: state,
-      },
-    },
-    null,
-    2
+type MqttMessage = {
+  id: number;
+  topic: string;
+  state: 'RUNNING' | 'STOPPED' | 'IDLE' | 'ERROR';
+  temp: number;
+  cycleCount: number;
+  ts: string;
+};
+
+// RUNNING appears 3x to simulate realistic production frequency
+const STATES = [
+  'RUNNING',
+  'RUNNING',
+  'RUNNING',
+  'IDLE',
+  'STOPPED',
+  'ERROR',
+] as const;
+
+let msgIdCounter = 0;
+const generateMqttMessage = (): MqttMessage => ({
+  id: ++msgIdCounter,
+  topic: MQTT_TOPICS[Math.floor(Math.random() * MQTT_TOPICS.length)],
+  state: STATES[Math.floor(Math.random() * STATES.length)],
+  temp: Math.round(60 + Math.random() * 30),
+  cycleCount: Math.floor(1000 + Math.random() * 9000),
+  ts: new Date().toISOString().slice(11, 19),
+});
+
+const stateColor = (s: string) =>
+  s === 'RUNNING'
+    ? 'text-green-400'
+    : s === 'ERROR'
+      ? 'text-red-400'
+      : s === 'STOPPED'
+        ? 'text-yellow-400'
+        : 'text-gray-400';
+
+// --- OEE data ---
+const getLeaves = (node: UnsNode): UnsNode[] =>
+  node.children ? node.children.flatMap(getLeaves) : [node];
+
+const OEE_NODES = getLeaves(unsData);
+
+const buildArcPath = (value: number, outerR = 44, innerR = 32): string => {
+  const startAngle = -Math.PI * 0.75;
+  const endAngle = startAngle + Math.PI * 1.5 * value;
+  return (
+    arc()({ innerRadius: innerR, outerRadius: outerR, startAngle, endAngle }) ??
+    ''
   );
 };
 
+const buildTrackPath = (outerR = 44, innerR = 32): string => {
+  const startAngle = -Math.PI * 0.75;
+  const endAngle = startAngle + Math.PI * 1.5;
+  return (
+    arc()({ innerRadius: innerR, outerRadius: outerR, startAngle, endAngle }) ??
+    ''
+  );
+};
+
+const oeeColor = (v: number) =>
+  v >= 0.85 ? '#6366f1' : v >= 0.75 ? '#f59e0b' : '#ef4444';
+
+// --- Animated background ---
+const BG_NODES = [
+  { x: 10, y: 15 },
+  { x: 30, y: 70 },
+  { x: 50, y: 25 },
+  { x: 70, y: 80 },
+  { x: 85, y: 20 },
+  { x: 20, y: 45 },
+  { x: 60, y: 55 },
+  { x: 90, y: 60 },
+  { x: 40, y: 90 },
+  { x: 75, y: 40 },
+];
+
+const BG_EDGES = [
+  [0, 2],
+  [2, 4],
+  [1, 5],
+  [5, 6],
+  [6, 3],
+  [7, 4],
+  [8, 3],
+  [9, 6],
+  [2, 5],
+  [7, 9],
+];
+
 const Hero: React.FC = () => {
-  const [mqttState, setMqttState] = useState('RUNNING');
+  const prefersReducedMotion = useReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
+
+  const [messages, setMessages] = useState<MqttMessage[]>(() => [
+    generateMqttMessage(),
+  ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const next = mqttStates[Math.floor(Math.random() * mqttStates.length)];
-      setMqttState(next);
-    }, 3000);
+      setMessages(prev => [...prev.slice(-2), generateMqttMessage()]);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
+
+  const [oeeIndex, setOeeIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOeeIndex(i => (i + 1) % OEE_NODES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentNode = OEE_NODES[oeeIndex];
+
+  const [unsIndex, setUnsIndex] = useState(2);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUnsIndex(i => (i + 1) % OEE_NODES.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentUnsNode = OEE_NODES[unsIndex];
+  const pathSegments = currentUnsNode.fullPath.split('/');
 
   return (
     <section
       id="hero"
-      className="min-h-screen px-6 pt-24 pb-12 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto"
+      className="relative min-h-screen px-6 pt-24 pb-12 flex flex-col md:flex-row items-start justify-between max-w-6xl mx-auto"
     >
+      {/* Animated background */}
+      {shouldAnimate && (
+        <div
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          aria-hidden="true"
+        >
+          <svg
+            className="w-full h-full opacity-[0.07] dark:opacity-[0.06]"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {BG_EDGES.map(([a, b], i) => (
+              <motion.line
+                key={i}
+                x1={`${BG_NODES[a].x}%`}
+                y1={`${BG_NODES[a].y}%`}
+                x2={`${BG_NODES[b].x}%`}
+                y2={`${BG_NODES[b].y}%`}
+                stroke="#6366f1"
+                strokeWidth={1}
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{ duration: 1.5, delay: i * 0.12, ease: 'easeOut' }}
+              />
+            ))}
+            {BG_NODES.map((node, i) => (
+              <motion.circle
+                key={i}
+                cx={`${node.x}%`}
+                cy={`${node.y}%`}
+                r={3}
+                fill="#6366f1"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{
+                  delay: 0.5 + i * 0.08,
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+            ))}
+          </svg>
+        </div>
+      )}
+
       {/* LEFT: Text */}
       <motion.div
         className="md:w-1/2 text-left"
@@ -49,53 +209,280 @@ const Hero: React.FC = () => {
           Industry 4.0 Software Engineer
         </h2>
         <p className="text-md text-gray-600 dark:text-gray-400 max-w-md mb-6">
-          I specialize in building scalable systems around Unified Namespace
-          (UNS), Ignition Perspective, and MQTT to unify industrial data.
+          I build the data infrastructure behind smart factories — connecting
+          machines, lines, and sites through MQTT, UNS, and Ignition Perspective
+          into a single source of truth.
         </p>
         <div className="flex gap-4">
           <a
             href="#demos"
-            className="px-5 py-2 rounded-md bg-indigo-600 text-white font-semibold text-sm shadow hover:bg-indigo-700 transition"
+            className="px-5 py-2 rounded-md bg-indigo-600 text-white font-semibold text-sm shadow hover:bg-indigo-700 active:scale-95 transition"
           >
             View Demos
           </a>
           <a
             href="#contact"
-            className="px-5 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white font-semibold text-sm shadow hover:bg-gray-300 dark:hover:bg-gray-700 transition"
+            className="px-5 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white font-semibold text-sm shadow hover:bg-gray-300 dark:hover:bg-gray-700 active:scale-95 transition"
           >
             Contact
           </a>
         </div>
       </motion.div>
 
-      {/* RIGHT: MQTT Card */}
+      {/* RIGHT: Dashboard cards column */}
       <motion.div
-        className="md:w-1/2 mt-12 md:mt-0 md:pl-10 flex justify-center"
+        className="md:w-1/2 mt-10 md:mt-0 md:pl-10 flex flex-col gap-4 w-full max-w-sm mx-auto md:mx-0"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-        whileHover={{
-          y: -4,
-          scale: 1.01,
-          transition: { type: 'spring', stiffness: 220, damping: 18 },
+      >
+        {/* MQTT Stream Card */}
+        <motion.div
+          whileHover={{
+            y: -4,
+            scale: 1.01,
+            transition: { type: 'spring', stiffness: 220, damping: 18 },
+          }}
+        >
+        <div className="bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 font-mono text-xs shadow-lg shadow-indigo-500/10">
+            {/* Terminal header */}
+            <div className="flex items-center justify-between mb-3 text-gray-500">
+              <div className="flex gap-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+              </div>
+              <div className="flex items-center gap-1.5 text-indigo-400">
+                <Wifi size={11} />
+                <span>mqtt.stream</span>
+              </div>
+            </div>
+            {/* Message stream */}
+            <div className="flex flex-col gap-1.5 min-h-[96px]">
+              <AnimatePresence initial={false}>
+                {messages.map(msg => (
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: shouldAnimate ? 0.3 : 0 }}
+                    className="flex flex-col gap-0.5"
+                  >
+                    <span className="text-gray-500">
+                      {msg.ts} ·{' '}
+                      <span className="text-indigo-300">
+                        {msg.topic.split('/').slice(-2).join('/')}
+                      </span>
+                    </span>
+                    <span className="pl-2">
+                      state:{' '}
+                      <span className={stateColor(msg.state)}>
+                        {msg.state}
+                      </span>
+                      <span className="text-gray-500">
+                        {' '}
+                        · temp:{' '}
+                        <span className="text-cyan-400">{msg.temp}°C</span> ·
+                        cycles:{' '}
+                        <span className="text-gray-300">{msg.cycleCount}</span>
+                      </span>
+                    </span>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+        </div>
+        </motion.div>
+
+        {/* OEE Gauge Card */}
+        <motion.div
+          className="hidden md:block bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+          whileHover={{
+            y: -4,
+            scale: 1.01,
+            transition: { type: 'spring', stiffness: 220, damping: 18 },
+          }}
+        >
+          {/* Card header */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-1.5 text-indigo-400 font-mono text-xs">
+              <Activity size={11} />
+              <span>oee.live</span>
+            </div>
+            <span className="text-gray-500 font-mono text-xs">
+              Richmond / Press
+            </span>
+          </div>
+          {/* Body: gauge left, metrics right */}
+          <div className="flex items-center gap-4">
+            {/* SVG arc gauge */}
+            <div className="relative flex-shrink-0">
+              <AnimatePresence mode="wait">
+                <motion.svg
+                  key={currentNode.fullPath}
+                  width={96}
+                  height={96}
+                  viewBox="-50 -50 100 100"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: shouldAnimate ? 0.4 : 0 }}
+                >
+                  <path d={buildTrackPath()} fill="#1f2937" />
+                  <path
+                    d={buildArcPath(currentNode.payload.OEE)}
+                    fill={oeeColor(currentNode.payload.OEE)}
+                  />
+                  <text
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize={14}
+                    fontWeight="bold"
+                    fill="white"
+                  >
+                    {Math.round(currentNode.payload.OEE * 100)}%
+                  </text>
+                  <text
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fontSize={6}
+                    fill="#9ca3af"
+                    y={14}
+                  >
+                    OEE
+                  </text>
+                </motion.svg>
+              </AnimatePresence>
+            </div>
+            {/* Metric bar rows */}
+            <div className="flex flex-col gap-1.5 font-mono text-xs flex-1">
+              {(['Availability', 'Quality', 'Performance'] as const).map(
+                key => (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between gap-2"
+                  >
+                    <span className="text-gray-500">{key.slice(0, 5)}</span>
+                    <div className="flex-1 h-1 rounded-full bg-gray-700 overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full bg-indigo-500"
+                        initial={{ width: 0 }}
+                        animate={{
+                          width: `${Math.round(currentNode.payload[key] * 100)}%`,
+                        }}
+                        transition={{
+                          duration: shouldAnimate ? 0.6 : 0,
+                          ease: 'easeOut',
+                        }}
+                      />
+                    </div>
+                    <span className="text-gray-300 w-8 text-right">
+                      {Math.round(currentNode.payload[key] * 100)}%
+                    </span>
+                  </div>
+                )
+              )}
+              <div className="mt-1 text-indigo-400 text-[10px] truncate">
+                {currentNode.fullPath.split('/').slice(-2).join(' › ')}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* UNS Path Card */}
+        <motion.div
+          className="hidden md:flex bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10 flex-col gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
+          whileHover={{
+            y: -4,
+            scale: 1.01,
+            transition: { type: 'spring', stiffness: 220, damping: 18 },
+          }}
+        >
+          {/* Header */}
+          <div className="flex items-center gap-1.5 text-indigo-400 font-mono text-xs">
+            <GitBranch size={11} />
+            <span>uns.path</span>
+          </div>
+          {/* Animated breadcrumb */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentUnsNode.fullPath}
+              className="flex flex-wrap items-center gap-1 font-mono text-xs"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: shouldAnimate ? 0.35 : 0 }}
+            >
+              {pathSegments.map((seg, i) => (
+                <React.Fragment key={i}>
+                  <span
+                    className={
+                      i === pathSegments.length - 1
+                        ? 'text-indigo-300 font-semibold'
+                        : 'text-gray-400'
+                    }
+                  >
+                    {seg}
+                  </span>
+                  {i < pathSegments.length - 1 && (
+                    <span className="text-gray-600">/</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+          {/* OEE payload preview */}
+          <div className="flex gap-3 font-mono text-[10px] text-gray-500 mt-1">
+            <span>
+              OEE{' '}
+              <span className="text-indigo-400">
+                {Math.round(currentUnsNode.payload.OEE * 100)}%
+              </span>
+            </span>
+            <span>
+              Avail{' '}
+              <span className="text-gray-300">
+                {Math.round(currentUnsNode.payload.Availability * 100)}%
+              </span>
+            </span>
+            <span>
+              Qual{' '}
+              <span className="text-gray-300">
+                {Math.round(currentUnsNode.payload.Quality * 100)}%
+              </span>
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-400 dark:text-gray-500"
+        initial={{ opacity: 0 }}
+        animate={
+          shouldAnimate ? { opacity: 1, y: [0, 6, 0] } : { opacity: 1 }
+        }
+        transition={{
+          opacity: { delay: 1.2, duration: 0.6 },
+          y: {
+            delay: 1.8,
+            duration: 1.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          },
         }}
       >
-        <div className="relative w-full max-w-sm rounded-xl overflow-hidden shadow-lg bg-[#0e0f1a] text-green-400 font-mono text-sm p-5 border border-gray-700 dark:border-gray-600">
-          {/* Header bar */}
-          <div className="flex items-center justify-between mb-3 text-gray-400 text-xs">
-            <div className="flex space-x-1">
-              <span className="w-3 h-3 rounded-full bg-red-500"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500"></span>
-            </div>
-            <span>mqtt.log</span>
-          </div>
-
-          {/* Code block */}
-          <pre className="whitespace-pre-wrap leading-relaxed">
-            {formatMqttPayload(mqttState)}
-          </pre>
-        </div>
+        <span className="text-xs font-mono tracking-widest uppercase">
+          scroll
+        </span>
+        <ChevronDown size={16} />
       </motion.div>
     </section>
   );

@@ -48,6 +48,14 @@ const UNSExplorer: React.FC = () => {
               : String(node.payload)}
           </pre>
         )}
+
+        {node.imageUrl && !hasChildren && (
+          <img
+            src={node.imageUrl}
+            alt={node.name}
+            className="mt-2 ml-6 rounded border border-gray-700 max-w-xs opacity-80 hover:opacity-100 transition-opacity"
+          />
+        )}
       </div>
     );
   };

@@ -38,8 +38,8 @@ const Demos: React.FC = () => {
             onClick={() => setActiveTab(tab.key)}
             className={`px-4 py-2 rounded font-medium text-sm transition ${
               activeTab === tab.key
-                ? 'bg-indigo-600 text-white'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/30'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-transparent hover:border-indigo-500/30'
             }`}
           >
             {tab.label}

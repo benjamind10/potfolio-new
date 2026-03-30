@@ -155,7 +155,7 @@ const Hero: React.FC = () => {
           aria-hidden="true"
         >
           <svg
-            className="w-full h-full opacity-[0.07] dark:opacity-[0.06]"
+            className="w-full h-full opacity-[0.15] dark:opacity-[0.07]"
             xmlns="http://www.w3.org/2000/svg"
           >
             {BG_EDGES.map(([a, b], i) => (

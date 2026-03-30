@@ -11,12 +11,28 @@ type MqttMessage = {
 };
 
 const simulatedTopics = [
-  'factory/line1/machineA/state',
-  'factory/line1/machineB/infeed',
-  'factory/line1/machineC/outfeed',
+  'Enterprise/Richmond/Press/Line1/Machine1/state',
+  'Enterprise/Richmond/Press/Line1/Machine2/OEE',
+  'Enterprise/Richmond/Press/Line2/Machine1/state',
+  'Enterprise/Richmond/Press/Line2/Machine2/infeed',
+  'Enterprise/Richmond/Press/Line3/Machine1/state',
+  'Enterprise/Richmond/Press/Line3/Machine2/outfeed',
+  'Enterprise/Richmond/Assembly/Line1/Station1/state',
+  'Enterprise/Richmond/Assembly/Line1/Station2/cycle_time',
+  'Enterprise/Richmond/Assembly/Line2/Station1/state',
+  'Enterprise/Richmond/Assembly/Line2/Station2/OEE',
 ];
 
-const sampleValues = ['RUNNING', 'STOPPED', 'IDLE', 'ERROR'];
+const sampleValues: (string | number)[] = [
+  'RUNNING',
+  'STOPPED',
+  'IDLE',
+  'ERROR',
+  0.91,
+  0.87,
+  0.94,
+  0.78,
+];
 
 function generateSimulatedMessage(): MqttMessage {
   const topic =

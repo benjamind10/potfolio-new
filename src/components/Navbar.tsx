@@ -35,8 +35,10 @@ const Navbar: React.FC = () => {
               key={name}
               to={to}
               smooth={true}
+              spy={true}
               offset={-96}
               duration={500}
+              activeClass="!text-indigo-500 dark:!text-indigo-400"
               className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
             >
               {name}
@@ -79,8 +81,10 @@ const Navbar: React.FC = () => {
                 key={name}
                 to={to}
                 smooth={true}
+                spy={true}
                 offset={-96}
                 duration={500}
+                activeClass="!text-indigo-500 dark:!text-indigo-400"
                 onClick={() => setMenuOpen(false)}
                 className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
               >

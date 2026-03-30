@@ -1,54 +1,86 @@
-# React + TypeScript + Vite
+# Ben Duran — Industry 4.0 Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page portfolio built with React 19 + TypeScript showcasing Industry 4.0 engineering skills: Ignition, MQTT, Unified Namespace (UNS), and MES development.
 
-Currently, two official plugins are available:
+**Live demos include:**
+- UNS Explorer — interactive drill-down tree of a Unified Namespace hierarchy with OEE metrics
+- MQTT Explorer — real-time topic browser with simulated mode and live HiveMQ connection
+- Script Profiler Java Module — Ignition Gateway module for profiling Jython scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** + **TypeScript**
+- **Vite 6** — build tool and dev server
+- **Tailwind CSS v4** — utility-first styling with class-based dark mode
+- **Framer Motion** — scroll-triggered and mount animations
+- **mqtt.js** — WebSocket MQTT client
+- **D3 v7** — data visualization
+- **Lucide React** — icon library
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Prerequisites
+
+- Node.js ≥ 18
+- npm ≥ 9
+
+---
+
+## Setup
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/benjamind10/portfolio.git
+cd portfolio
+
+# 2. Install dependencies
+npm install
+
+# 3. Create environment file
+echo "VITE_MQTTBROKER=wss://broker.hivemq.com:8884/mqtt" > .env
+
+# 4. Start dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open `http://localhost:5173` in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+> The `.env` file is already committed with the default HiveMQ public broker. The MQTT Explorer works in simulated mode without a broker connection.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server with HMR |
+| `npm run build` | Type-check + production build → `dist/` |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Serve the production build locally |
+
+---
+
+## Project Structure
+
 ```
+src/
+├── components/       React page sections and demo components
+│   └── common/       Shared utility components (FadeInWrapper)
+├── hooks/            Custom hooks (useTheme, useMqtt)
+├── data/             Static UNS data structures
+├── utils/            Utility functions (cn classname helper)
+└── assets/           Images used in the app
+public/
+├── computer-chip.png Favicon
+└── resume.pdf        Resume download (add manually if missing)
+```
+
+---
+
+## Contact
+
+- Email: ben.duran@proton.me
+- GitHub: [benjamind10](https://github.com/benjamind10)
+- LinkedIn: [benjamin-duran](https://www.linkedin.com/in/benjamin-duran-3a880a1b9/)

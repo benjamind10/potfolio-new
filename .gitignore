@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.claude
+codex
+CODEX_CLAUDE_SKILLS_MIGRATION_PLAN.md

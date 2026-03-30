@@ -20,7 +20,7 @@ const About: React.FC = () => {
       <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
         {/* Avatar */}
         <FadeInWrapper yOffset={10}>
-          <div className="w-36 h-36 rounded-full overflow-hidden shadow border-2 border-indigo-500">
+          <div className="w-36 h-36 rounded-full overflow-hidden shadow-lg shadow-indigo-500/20 border-2 border-indigo-500">
             <img
               src={profilePic}
               alt="Ben Duran"
@@ -47,7 +47,7 @@ const About: React.FC = () => {
               {[
                 'Ignition',
                 'MQTT',
-                'MSSQL',
+                'SQL',
                 'UNS',
                 'Python',
                 'Java',
@@ -55,7 +55,7 @@ const About: React.FC = () => {
               ].map(skill => (
                 <span
                   key={skill}
-                  className="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-800 text-sm text-indigo-600 dark:text-indigo-100 font-medium"
+                  className="px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-800 text-sm text-indigo-600 dark:text-indigo-100 font-medium hover:scale-105 transition-transform cursor-default"
                 >
                   {skill}
                 </span>
@@ -65,7 +65,7 @@ const About: React.FC = () => {
             {/* Resume Button */}
             <a
               href="/resume.pdf"
-              className="mt-6 inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded shadow transition"
+              className="mt-6 inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-sm font-medium rounded shadow transition"
               download
             >
               <Download size={16} className="mr-2" />

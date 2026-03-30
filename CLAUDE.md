@@ -30,15 +30,17 @@ src/
 ├── index.css                  Global CSS (Tailwind imports)
 ├── components/
 │   ├── common/
-│   │   └── FadeInWrapper.tsx  Framer Motion scroll-triggered fade-in wrapper
+│   │   ├── FadeInWrapper.tsx  Framer Motion scroll-triggered fade-in wrapper
+│   │   └── ImageCarousel.tsx  Reusable prev/next image carousel with Framer Motion
 │   ├── Navbar.tsx             Sticky nav, theme toggle, mobile menu
-│   ├── Hero.tsx               Landing section with animated MQTT log card
+│   ├── Hero.tsx               Landing section with 3 animated dashboard cards (MQTT stream, OEE gauge, UNS path)
 │   ├── About.tsx              Profile photo, bio, skills, resume download
 │   ├── Experience.tsx         Work timeline (4 jobs, whileInView animation)
-│   ├── Demos.tsx              Tab container for interactive demos
-│   ├── MQTTExplorer.tsx       Dual-mode MQTT browser (simulated / live HiveMQ)
-│   ├── UNSExplorer.tsx        Expandable UNS tree from unsData.ts
-│   ├── ScriptProfilerDemo.tsx Screenshot gallery for Java module demo
+│   ├── Demos.tsx              Tab container for image-based demos (UNS Simulator, Ignition Java Module)
+│   ├── UNSSimulatorDemo.tsx   Carousel of 5 UNS simulator screenshots
+│   ├── ScriptProfilerDemo.tsx Carousel of Ignition Java module screenshots
+│   ├── MQTTExplorer.tsx       Dual-mode MQTT browser — UNUSED (removed from Demos tabs)
+│   ├── UNSExplorer.tsx        Expandable UNS tree — UNUSED (removed from Demos tabs)
 │   ├── NamespaceExplorer.tsx  D3 SVG tree — UNUSED (commented out in Demos.tsx)
 │   ├── LogSimulator.tsx       Log stream UI — UNUSED (commented out in Demos.tsx)
 │   ├── Contact.tsx            Contact form + info (form submit is non-functional)
@@ -54,7 +56,12 @@ src/
 └── assets/
     ├── profile_pic.jpg
     ├── script-profiler-1.png
-    └── script-profiler-2.png
+    ├── script-profiler-2.png
+    ├── uns-sim-1.png
+    ├── uns-sim-2.png
+    ├── uns-sim-3.png
+    ├── uns-sim-4.png
+    └── uns-sim-5.png
 ```
 
 ---
@@ -88,13 +95,13 @@ This is required for `MQTTExplorer`'s live mode. The simulated mode works withou
 |-----------|---------|
 | `App.tsx` | Assembles all sections in page order |
 | `Navbar.tsx` | Sticky nav; only consumer of `useTheme` |
-| `Hero.tsx` | Animated intro + cycling MQTT payload card (self-contained, no real MQTT) |
+| `Hero.tsx` | Animated intro + 3 dashboard cards: MQTT stream, OEE gauge, UNS path (self-contained, no real MQTT) |
 | `About.tsx` | Profile, skills, resume download link |
 | `Experience.tsx` | Timeline with `motion.div whileInView` animations |
-| `Demos.tsx` | Tab switcher — add demos here by appending to `TABS` array |
-| `MQTTExplorer.tsx` | Live or simulated MQTT topic browser |
-| `UNSExplorer.tsx` | Recursive click-to-expand UNS tree |
-| `ScriptProfilerDemo.tsx` | Static image gallery |
+| `Demos.tsx` | Tab switcher — 2 tabs: UNS Simulator, Ignition Java Module |
+| `UNSSimulatorDemo.tsx` | Image carousel of 5 UNS simulator screenshots |
+| `ScriptProfilerDemo.tsx` | Image carousel of Ignition Java module screenshots |
+| `ImageCarousel.tsx` | Reusable carousel: prev/next nav, position indicator, Framer Motion transitions |
 | `Contact.tsx` | Contact info + non-functional form |
 | `FadeInWrapper.tsx` | `whileInView` fade-in; wraps any content |
 
@@ -150,7 +157,7 @@ unsData (UnsNode tree with fullPath) → UNSExplorer
 ## Known Gotchas
 
 1. **`useMqtt.ts` is not imported anywhere** — it connects at module scope if ever imported; do not import it without understanding the double-connection risk with `MQTTExplorer`
-2. **`NamespaceExplorer` is dead code** — defined and works, but commented out in `Demos.tsx`; re-enable by adding it back to the `TABS` array
+2. **`MQTTExplorer`, `UNSExplorer`, `NamespaceExplorer` are dead code** — no longer imported by `Demos.tsx`; re-enable by adding them back to the `TABS` array
 3. **Contact form does nothing** — no `onSubmit` handler; the Send button submits nothing
 4. **`public/resume.pdf` must exist** — the About section has a hard-coded download link to `/resume.pdf`; if the file is missing, the button 404s silently
 

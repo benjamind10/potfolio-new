@@ -297,7 +297,7 @@ const Hero: React.FC = () => {
 
         {/* OEE Gauge Card */}
         <motion.div
-          className="hidden md:block bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10"
+          className="bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
@@ -395,7 +395,7 @@ const Hero: React.FC = () => {
 
         {/* UNS Path Card */}
         <motion.div
-          className="hidden md:flex bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10 flex-col gap-2"
+          className="flex bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10 flex-col gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}

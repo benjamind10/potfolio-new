@@ -63,14 +63,14 @@ const About: React.FC = () => {
             </div>
 
             {/* Resume Button */}
-            <a
+            {/* <a
               href="/resume.pdf"
               className="mt-6 inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white text-sm font-medium rounded shadow transition"
               download
             >
               <Download size={16} className="mr-2" />
               Download Resume
-            </a>
+            </a> */}
           </div>
         </FadeInWrapper>
       </div>

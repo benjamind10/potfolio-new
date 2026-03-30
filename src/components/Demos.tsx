@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import MQTTExplorer from './MQTTExplorer';
-// import LogSimulator from './LogSimulator';
-import UNSExplorer from './UNSExplorer';
+import UNSSimulatorDemo from './UNSSimulatorDemo';
 import ScriptProfilerDemo from './ScriptProfilerDemo';
 
 const TABS = [
-  { key: 'uns', label: 'UNS Explorer', component: <UNSExplorer /> },
-  { key: 'mqtt', label: 'MQTT Explorer', component: <MQTTExplorer /> },
+  { key: 'uns-sim', label: 'UNS Simulator', component: <UNSSimulatorDemo /> },
   {
     key: 'profiler',
-    label: 'Script Profiler Java Module',
+    label: 'Ignition Java Module',
     component: <ScriptProfilerDemo />,
   },
-  //   { key: 'logs', label: 'Log Simulator', component: <LogSimulator /> },
 ];
 
 const Demos: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('mqtt');
+  const [activeTab, setActiveTab] = useState('uns-sim');
 
   const active = TABS.find(tab => tab.key === activeTab)?.component;
 

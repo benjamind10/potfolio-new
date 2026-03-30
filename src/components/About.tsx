@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Download, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import profilePic from '../assets/profile_pic.jpg';
 import FadeInWrapper from './common/FadeInWrapper';
 

@@ -36,9 +36,14 @@ const About: React.FC = () => {
             <div className="flex items-start gap-3 mb-4">
               <User className="text-indigo-500 mt-1" />
               <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                I'm a software engineer focused on industrial systems. I
-                specialize in Ignition Perspective, MQTT, and scalable
-                architectures built on the Unified Namespace (UNS).
+                I build enterprise industrial applications. My focus is
+                designing scalable Unified Namespace (UNS) architectures,
+                MQTT-driven data pipelines, and Ignition Perspective solutions
+                that give operations teams real-time visibility across the plant
+                floor. I also use agentic AI to accelerate development, from
+                automated code generation to intelligent workflow orchestration,
+                delivering production- grade systems faster without sacrificing
+                quality.
               </p>
             </div>
 
@@ -46,12 +51,14 @@ const About: React.FC = () => {
             <div className="flex flex-wrap gap-2 mt-4">
               {[
                 'Ignition',
+                'ReactJS',
                 'MQTT',
                 'SQL',
                 'UNS',
                 'Python',
                 'Java',
                 'TypeScript',
+                'Agentic AI',
               ].map(skill => (
                 <span
                   key={skill}

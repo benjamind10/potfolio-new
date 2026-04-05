@@ -7,7 +7,7 @@ const jobs = [
   {
     title: 'MES Engineer — Fortune Brands Innovations',
     dates: 'Jan 2025 – Present · Hybrid',
-    desc: 'Developed, maintained, and supported MES applications to improve operational efficiency and support continuous improvement across facilities, using agentic harnesses and workflows with Claude Code, Codex, and GitHub Copilot.',
+    desc: 'Software engineer focused on building the Unified Namespace and applying AI to manufacturing. Architected the UNS from inception to deployment and introduced agentic AI workflows across facilities.',
     tags: [
       'Ignition',
       'Python',

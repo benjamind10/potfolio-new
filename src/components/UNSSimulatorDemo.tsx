@@ -22,8 +22,10 @@ const UNSSimulatorDemo: React.FC = () => {
           UNS Simulator
         </h3>
         <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
-          A platform for designing Unified Namespace schemas, configuring MQTT
-          brokers, and simulating industrial IoT data flows in one place.
+          A design tool for modeling Unified Namespace topic hierarchies,
+          configuring MQTT broker connections, and simulating realistic
+          industrial data flows — built to validate UNS schemas before
+          deploying to production.
         </p>
       </div>
       <ImageCarousel images={images} />

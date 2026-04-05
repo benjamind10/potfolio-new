@@ -36,29 +36,27 @@ const About: React.FC = () => {
             <div className="flex items-start gap-3 mb-4">
               <User className="text-indigo-500 mt-1" />
               <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                I build enterprise industrial applications. My focus is
-                designing scalable Unified Namespace (UNS) architectures,
-                MQTT-driven data pipelines, and Ignition Perspective solutions
-                that give operations teams real-time visibility across the plant
-                floor. I also use agentic AI to accelerate development, from
-                automated code generation to intelligent workflow orchestration,
-                delivering production- grade systems faster without sacrificing
-                quality.
+                I design and deploy Unified Namespace architectures, MQTT data
+                infrastructure, and Ignition-based MES solutions that give
+                operations teams real-time visibility across the plant floor. I
+                also apply agentic AI to manufacturing workflows, from automated
+                code generation to intelligent process orchestration, delivering
+                production-grade systems faster without sacrificing quality.
               </p>
             </div>
 
             {/* Skills */}
             <div className="flex flex-wrap gap-2 mt-4">
               {[
-                'Ignition',
-                'ReactJS',
-                'MQTT',
-                'SQL',
-                'UNS',
-                'Python',
-                'Java',
-                'TypeScript',
+                'UNS Architecture',
+                'MQTT / Sparkplug B',
+                'Ignition Platform',
                 'Agentic AI',
+                'Python',
+                'TypeScript',
+                'Java',
+                'React',
+                'SQL',
               ].map(skill => (
                 <span
                   key={skill}

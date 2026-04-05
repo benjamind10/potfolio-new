@@ -7,50 +7,46 @@ const jobs = [
   {
     title: 'MES Engineer — Fortune Brands Innovations',
     dates: 'Jan 2025 – Present · Hybrid',
-    desc: 'Software engineer focused on building the Unified Namespace and applying AI to manufacturing. Architected the UNS from inception to deployment and introduced agentic AI workflows across facilities.',
+    desc: 'Architected the Unified Namespace from inception to production across multiple facilities. Introduced agentic AI workflows for development acceleration and process automation in a manufacturing environment.',
     tags: [
-      'Ignition',
-      'Python',
-      'MQTT',
-      'PostgreSQL',
       'UNS',
-      'MES',
-      'ReactJS',
-      'TypeScript',
+      'MQTT',
+      'Ignition',
       'Agentic AI',
-      'Timebase',
-      'InfoHub',
+      'Python',
+      'TypeScript',
+      'React',
+      'PostgreSQL',
+      'MES',
     ],
   },
   {
     title: 'Software Engineer II — Fuuz',
     dates: 'Nov 2024 – Jan 2025 · Remote',
-    desc: 'Delivered scalable MES solutions using Typescript, Fuuz App, and React.',
-    tags: ['TypeScript', 'ReactJS', 'JavaScript', 'MES', 'REST APIs'],
+    desc: 'Developed MES front-end modules and API integrations for production tracking and scheduling workflows.',
+    tags: ['TypeScript', 'React', 'MES', 'REST APIs'],
   },
   {
     title: 'MI Solutions Specialist I — GPA',
     dates: 'Jan 2024 – Oct 2024 · Hybrid',
-    desc: 'Built scalable application logic, databases, and maintainable interfaces for industrial data systems.',
+    desc: 'Designed MQTT-based data pipelines and Ignition Perspective interfaces for real-time industrial monitoring and OEE reporting.',
     tags: [
       'Ignition',
       'MQTT',
+      'UNS',
       'Python',
       'SQL Server',
-      'UNS',
-      'Node.js',
       'OPC-UA',
-      'Historian',
+      'Node.js',
     ],
   },
   {
     title: 'Full Stack Developer — GPA',
     dates: 'Jul 2022 – Jan 2024',
-    desc: 'Built custom MES software and Ignition solutions with deep backend logic in Node and Python.',
+    desc: 'Built custom MES applications and Ignition modules with Python and Node.js backends, including REST API services and containerized deployments.',
     tags: [
       'Python',
       'Node.js',
-      'JavaScript',
       'Ignition',
       'SQL',
       'MES',
@@ -73,7 +69,7 @@ const Experience: React.FC = () => {
       <div className="p-6 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg hover:shadow-xl transition-shadow duration-300">
         <div className="flex items-center gap-3 mb-6 text-indigo-500 font-semibold">
           <Briefcase size={20} />
-          <span>Experience</span>
+          <span>Work History</span>
         </div>
 
         <div className="relative border-l border-indigo-500/40 pl-6">
@@ -99,7 +95,7 @@ const Experience: React.FC = () => {
                   {job.tags.map(tag => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 rounded-full bg-indigo-900/50 text-indigo-300 text-xs font-medium border border-indigo-700/40"
+                      className="px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-xs font-medium border border-indigo-200 dark:border-indigo-700/40"
                     >
                       {tag}
                     </span>

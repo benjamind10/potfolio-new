@@ -48,8 +48,8 @@ const Contact: React.FC = () => {
         </h2>
         <div className="w-20 h-1 bg-indigo-500 rounded mb-4" />
         <p className="text-gray-600 dark:text-gray-400 mb-12 max-w-2xl">
-          Have a question or want to work together? Feel free to drop me a
-          message. I'd love to hear from you!
+          Interested in UNS architecture, manufacturing AI, or Ignition
+          development? I'm always open to connecting.
         </p>
       </FadeInWrapper>
 
@@ -62,7 +62,7 @@ const Contact: React.FC = () => {
               Contact Information
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Fill out the form and I'll get back to you as soon as possible.
+              Send a message and I'll follow up shortly.
             </p>
 
             <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
@@ -89,7 +89,7 @@ const Contact: React.FC = () => {
                   href="https://github.com/benjamind10"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-2 rounded-full bg-gray-800 text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
+                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
                 >
                   <Github size={18} />
                 </a>
@@ -97,13 +97,13 @@ const Contact: React.FC = () => {
                   href="https://www.linkedin.com/in/benjamin-duran-3a880a1b9/"
                   target="_blank"
                   rel="noreferrer"
-                  className="p-2 rounded-full bg-gray-800 text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
+                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
                 >
                   <Linkedin size={18} />
                 </a>
                 <a
                   href="mailto:ben.duran@proton.me"
-                  className="p-2 rounded-full bg-gray-800 text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
+                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:scale-110 transition-transform"
                 >
                   <Mail size={18} />
                 </a>
@@ -116,11 +116,11 @@ const Contact: React.FC = () => {
         <FadeInWrapper delay={0.2} yOffset={30}>
           <form
             onSubmit={handleSubmit}
-            className="p-6 rounded-xl border border-gray-700 bg-gray-900 space-y-4 shadow-xl"
+            className="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 space-y-4 shadow-xl"
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1 text-white">
+                <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-white">
                   Your Name
                 </label>
                 <input
@@ -131,11 +131,11 @@ const Contact: React.FC = () => {
                     setForm(prev => ({ ...prev, name: e.target.value }))
                   }
                   required
-                  className="w-full px-4 py-2 rounded border border-gray-700 bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1 text-white">
+                <label className="block text-sm font-medium mb-1 text-gray-900 dark:text-white">
                   Your Email
                 </label>
                 <input
@@ -146,7 +146,7 @@ const Contact: React.FC = () => {
                     setForm(prev => ({ ...prev, email: e.target.value }))
                   }
                   required
-                  className="w-full px-4 py-2 rounded border border-gray-700 bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
             </div>
@@ -163,7 +163,7 @@ const Contact: React.FC = () => {
                   setForm(prev => ({ ...prev, subject: e.target.value }))
                 }
                 required
-                className="w-full px-4 py-2 rounded border border-gray-700 bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
                   setForm(prev => ({ ...prev, message: e.target.value }))
                 }
                 required
-                className="w-full px-4 py-2 rounded border border-gray-700 bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-2 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 

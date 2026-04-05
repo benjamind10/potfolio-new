@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
   const links = [
     { name: 'About', to: 'about' },
     { name: 'Experience', to: 'experience' },
-    { name: 'Demos', to: 'demos' },
+    { name: 'Projects', to: 'demos' },
     { name: 'Contact', to: 'contact' },
   ];
 

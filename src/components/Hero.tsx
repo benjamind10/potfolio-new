@@ -206,12 +206,12 @@ const Hero: React.FC = () => {
           <span className="text-indigo-600 dark:text-indigo-400">Duran</span>
         </h1>
         <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-4">
-          Industry 4.0 Software Engineer
+          Manufacturing Software Engineer
         </h2>
         <p className="text-md text-gray-600 dark:text-gray-400 max-w-md mb-6">
-          I build the data infrastructure behind smart factories — connecting
-          machines, lines, and sites through MQTT, UNS, and Ignition Perspective
-          into a single source of truth.
+          I architect Unified Namespace systems and apply AI to manufacturing
+          — unifying machines, lines, and sites through MQTT and Ignition into
+          a single source of truth for the plant floor.
         </p>
         <div className="flex gap-4">
           <a
@@ -244,7 +244,7 @@ const Hero: React.FC = () => {
             transition: { type: 'spring', stiffness: 220, damping: 18 },
           }}
         >
-        <div className="bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 font-mono text-xs shadow-lg shadow-indigo-500/10">
+        <div className="bg-white dark:bg-[#0e0f1a] rounded-xl border border-gray-200 dark:border-gray-600 p-4 font-mono text-xs shadow-lg shadow-indigo-500/10">
             {/* Terminal header */}
             <div className="flex items-center justify-between mb-3 text-gray-500">
               <div className="flex gap-1">
@@ -271,7 +271,7 @@ const Hero: React.FC = () => {
                   >
                     <span className="text-gray-500">
                       {msg.ts} ·{' '}
-                      <span className="text-indigo-300">
+                      <span className="text-indigo-600 dark:text-indigo-300">
                         {msg.topic.split('/').slice(-2).join('/')}
                       </span>
                     </span>
@@ -285,7 +285,7 @@ const Hero: React.FC = () => {
                         · temp:{' '}
                         <span className="text-cyan-400">{msg.temp}°C</span> ·
                         cycles:{' '}
-                        <span className="text-gray-300">{msg.cycleCount}</span>
+                        <span className="text-gray-700 dark:text-gray-300">{msg.cycleCount}</span>
                       </span>
                     </span>
                   </motion.div>
@@ -297,7 +297,7 @@ const Hero: React.FC = () => {
 
         {/* OEE Gauge Card */}
         <motion.div
-          className="bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10"
+          className="bg-white dark:bg-[#0e0f1a] rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
@@ -333,7 +333,7 @@ const Hero: React.FC = () => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: shouldAnimate ? 0.4 : 0 }}
                 >
-                  <path d={buildTrackPath()} fill="#1f2937" />
+                  <path d={buildTrackPath()} className="fill-gray-200 dark:fill-[#1f2937]" />
                   <path
                     d={buildArcPath(currentNode.payload.OEE)}
                     fill={oeeColor(currentNode.payload.OEE)}
@@ -343,7 +343,7 @@ const Hero: React.FC = () => {
                     dominantBaseline="middle"
                     fontSize={14}
                     fontWeight="bold"
-                    fill="white"
+                    className="fill-gray-900 dark:fill-white"
                   >
                     {Math.round(currentNode.payload.OEE * 100)}%
                   </text>
@@ -368,7 +368,7 @@ const Hero: React.FC = () => {
                     className="flex items-center justify-between gap-2"
                   >
                     <span className="text-gray-500">{key.slice(0, 5)}</span>
-                    <div className="flex-1 h-1 rounded-full bg-gray-700 overflow-hidden">
+                    <div className="flex-1 h-1 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
                       <motion.div
                         className="h-full rounded-full bg-indigo-500"
                         initial={{ width: 0 }}
@@ -381,7 +381,7 @@ const Hero: React.FC = () => {
                         }}
                       />
                     </div>
-                    <span className="text-gray-300 w-8 text-right">
+                    <span className="text-gray-700 dark:text-gray-300 w-8 text-right">
                       {Math.round(currentNode.payload[key] * 100)}%
                     </span>
                   </div>
@@ -396,7 +396,7 @@ const Hero: React.FC = () => {
 
         {/* UNS Path Card */}
         <motion.div
-          className="flex bg-[#0e0f1a] rounded-xl border border-gray-700 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10 flex-col gap-2"
+          className="flex bg-white dark:bg-[#0e0f1a] rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-lg shadow-indigo-500/10 flex-col gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
@@ -427,7 +427,7 @@ const Hero: React.FC = () => {
                     <span
                       className={
                         i === pathSegments.length - 1
-                          ? 'text-indigo-300 font-semibold'
+                          ? 'text-indigo-600 dark:text-indigo-300 font-semibold'
                           : 'text-gray-400'
                       }
                     >
@@ -451,13 +451,13 @@ const Hero: React.FC = () => {
             </span>
             <span>
               Avail{' '}
-              <span className="text-gray-300">
+              <span className="text-gray-700 dark:text-gray-300">
                 {Math.round(currentUnsNode.payload.Availability * 100)}%
               </span>
             </span>
             <span>
               Qual{' '}
-              <span className="text-gray-300">
+              <span className="text-gray-700 dark:text-gray-300">
                 {Math.round(currentUnsNode.payload.Quality * 100)}%
               </span>
             </span>

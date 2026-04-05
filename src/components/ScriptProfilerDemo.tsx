@@ -9,7 +9,20 @@ const images = [
 ];
 
 const ScriptProfilerDemo: React.FC = () => {
-  return <ImageCarousel images={images} />;
+  return (
+    <div className="space-y-4">
+      <div className="rounded-xl border border-gray-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/70">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          Ignition Java Module
+        </h3>
+        <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+          A module for Ignition 8.1 that profiles your shared scripts and lets
+          you view performance stats about them.
+        </p>
+      </div>
+      <ImageCarousel images={images} />
+    </div>
+  );
 };
 
 export default ScriptProfilerDemo;

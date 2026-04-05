@@ -18,6 +18,8 @@ const jobs = [
       'ReactJS',
       'TypeScript',
       'Agentic AI',
+      'Timebase',
+      'InfoHub',
     ],
   },
   {

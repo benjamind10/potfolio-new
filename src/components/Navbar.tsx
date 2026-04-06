@@ -39,14 +39,14 @@ const Navbar: React.FC = () => {
               offset={-96}
               duration={500}
               activeClass="!text-indigo-500 dark:!text-indigo-400"
-              className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
+              className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 cursor-pointer transition-colors duration-200"
             >
               {name}
             </Link>
           ))}
           <button
             onClick={toggle}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             aria-label="Toggle Theme"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -57,14 +57,14 @@ const Navbar: React.FC = () => {
         <div className="md:hidden flex items-center space-x-4">
           <button
             onClick={toggle}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             aria-label="Toggle Theme"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             aria-label="Toggle Menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
                 duration={500}
                 activeClass="!text-indigo-500 dark:!text-indigo-400"
                 onClick={() => setMenuOpen(false)}
-                className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 cursor-pointer transition"
+                className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 cursor-pointer transition-colors duration-200"
               >
                 {name}
               </Link>

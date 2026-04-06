@@ -3,4 +3,5 @@
 
 body {
   @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }

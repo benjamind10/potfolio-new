@@ -198,31 +198,31 @@ const Hero: React.FC = () => {
         className="md:w-1/2 text-left"
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <p className="text-indigo-500 text-sm font-mono mb-2">Hello! I'm</p>
-        <h1 className="text-5xl font-extrabold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-2">
           Ben{' '}
           <span className="text-indigo-600 dark:text-indigo-400">Duran</span>
         </h1>
-        <h2 className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-4">
+        <h2 className="text-xl md:text-2xl tracking-tight text-gray-700 dark:text-gray-300 mb-4">
           Manufacturing Software Engineer
         </h2>
-        <p className="text-md text-gray-600 dark:text-gray-400 max-w-md mb-6">
-          I architect Unified Namespace systems and apply AI to manufacturing
-          — unifying machines, lines, and sites through MQTT and Ignition into
-          a single source of truth for the plant floor.
+        <p className="text-base text-gray-600 dark:text-gray-400 max-w-md mb-6">
+          I architect Unified Namespace systems and apply AI to manufacturing —
+          unifying machines, lines, and sites through MQTT and Ignition into a
+          single source of truth for the plant floor.
         </p>
         <div className="flex gap-4">
           <a
             href="#demos"
-            className="px-5 py-2 rounded-md bg-indigo-600 text-white font-semibold text-sm shadow hover:bg-indigo-700 active:scale-95 transition"
+            className="px-5 py-2 rounded-md bg-indigo-600 text-white font-semibold text-sm shadow-sm hover:bg-indigo-700 active:scale-95 transition"
           >
             View Demos
           </a>
           <a
             href="#contact"
-            className="px-5 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white font-semibold text-sm shadow hover:bg-gray-300 dark:hover:bg-gray-700 active:scale-95 transition"
+            className="px-5 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white font-semibold text-sm shadow-sm hover:bg-gray-300 dark:hover:bg-gray-700 active:scale-95 transition"
           >
             Contact
           </a>
@@ -231,7 +231,7 @@ const Hero: React.FC = () => {
 
       {/* RIGHT: Dashboard cards column */}
       <motion.div
-        className="md:w-1/2 mt-10 md:mt-0 md:pl-10 flex flex-col gap-4 w-full max-w-sm mx-auto md:mx-0"
+        className="md:w-1/2 mt-10 md:mt-0 md:pl-10 flex flex-col gap-4 w-full max-w-xs sm:max-w-sm mx-auto md:mx-0"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
@@ -244,7 +244,7 @@ const Hero: React.FC = () => {
             transition: { type: 'spring', stiffness: 220, damping: 18 },
           }}
         >
-        <div className="bg-white dark:bg-[#0e0f1a] rounded-xl border border-gray-200 dark:border-gray-600 p-4 font-mono text-xs shadow-lg shadow-indigo-500/10">
+          <div className="bg-white dark:bg-[#0e0f1a] rounded-xl border border-gray-200 dark:border-gray-600 p-4 font-mono text-xs shadow-lg shadow-indigo-500/10">
             {/* Terminal header */}
             <div className="flex items-center justify-between mb-3 text-gray-500">
               <div className="flex gap-1">
@@ -277,22 +277,22 @@ const Hero: React.FC = () => {
                     </span>
                     <span className="pl-2">
                       state:{' '}
-                      <span className={stateColor(msg.state)}>
-                        {msg.state}
-                      </span>
+                      <span className={stateColor(msg.state)}>{msg.state}</span>
                       <span className="text-gray-500">
                         {' '}
                         · temp:{' '}
                         <span className="text-cyan-400">{msg.temp}°C</span> ·
                         cycles:{' '}
-                        <span className="text-gray-700 dark:text-gray-300">{msg.cycleCount}</span>
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {msg.cycleCount}
+                        </span>
                       </span>
                     </span>
                   </motion.div>
                 ))}
               </AnimatePresence>
             </div>
-        </div>
+          </div>
         </motion.div>
 
         {/* OEE Gauge Card */}
@@ -333,7 +333,10 @@ const Hero: React.FC = () => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: shouldAnimate ? 0.4 : 0 }}
                 >
-                  <path d={buildTrackPath()} className="fill-gray-200 dark:fill-[#1f2937]" />
+                  <path
+                    d={buildTrackPath()}
+                    className="fill-gray-200 dark:fill-[#1f2937]"
+                  />
                   <path
                     d={buildArcPath(currentNode.payload.OEE)}
                     fill={oeeColor(currentNode.payload.OEE)}
@@ -469,9 +472,7 @@ const Hero: React.FC = () => {
       <motion.div
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-400 dark:text-gray-500"
         initial={{ opacity: 0 }}
-        animate={
-          shouldAnimate ? { opacity: 1, y: [0, 6, 0] } : { opacity: 1 }
-        }
+        animate={shouldAnimate ? { opacity: 1, y: [0, 6, 0] } : { opacity: 1 }}
         transition={{
           opacity: { delay: 1.2, duration: 0.6 },
           y: {

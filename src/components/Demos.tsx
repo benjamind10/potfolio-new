@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import UNSSimulatorDemo from './UNSSimulatorDemo';
 import ScriptProfilerDemo from './ScriptProfilerDemo';
+import SectionHeader from './common/SectionHeader';
 
 const TABS = [
   { key: 'uns-sim', label: 'UNS Simulator', component: <UNSSimulatorDemo /> },
@@ -19,32 +20,31 @@ const Demos: React.FC = () => {
   return (
     <section
       id="demos"
-      className="scroll-mt-24 pt-20 pb-20 px-6 max-w-6xl mx-auto"
+      className="scroll-mt-24 bg-gray-50/70 dark:bg-gray-800/30"
     >
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        Projects
-      </h2>
-      <div className="w-20 h-1 bg-indigo-500 rounded mb-8" />
+      <div className="max-w-6xl mx-auto px-6 py-16 md:py-20">
+        <SectionHeader title="Projects" />
 
-      {/* Tab headers */}
-      <div className="flex space-x-4 mb-6">
-        {TABS.map(tab => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`px-4 py-2 rounded font-medium text-sm transition ${
-              activeTab === tab.key
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/30'
-                : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 border border-transparent hover:border-indigo-500/30'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+        {/* Tab headers */}
+        <div className="flex space-x-4 mb-6">
+          {TABS.map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`px-4 py-2 rounded font-medium text-sm active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all ${
+                activeTab === tab.key
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/30'
+                  : 'bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 border border-transparent hover:border-indigo-500/30'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Active demo component */}
+        <div>{active}</div>
       </div>
-
-      {/* Active demo component */}
-      <div>{active}</div>
     </section>
   );
 };

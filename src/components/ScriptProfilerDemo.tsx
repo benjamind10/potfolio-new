@@ -11,14 +11,14 @@ const images = [
 const ScriptProfilerDemo: React.FC = () => {
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-gray-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/70">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+      <div className="rounded-xl border border-gray-200 bg-white/80 p-5 shadow-md shadow-indigo-500/5 dark:border-gray-800 dark:bg-gray-900/70">
+        <h3 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           Ignition Java Module
         </h3>
         <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
-          A custom Java module for Ignition 8.1 that instruments shared
-          script execution, surfaces per-function performance metrics, and
-          identifies bottlenecks in gateway and client scripting environments.
+          A custom Java module for Ignition 8.1 that instruments shared script
+          execution, surfaces per-function performance metrics, and identifies
+          bottlenecks in gateway and client scripting environments.
         </p>
       </div>
       <ImageCarousel images={images} />

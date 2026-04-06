@@ -17,15 +17,15 @@ const images = [
 const UNSSimulatorDemo: React.FC = () => {
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-gray-200 bg-white/80 p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/70">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+      <div className="rounded-xl border border-gray-200 bg-white/80 p-5 shadow-md shadow-indigo-500/5 dark:border-gray-800 dark:bg-gray-900/70">
+        <h3 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           UNS Simulator
         </h3>
         <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
           A design tool for modeling Unified Namespace topic hierarchies,
           configuring MQTT broker connections, and simulating realistic
-          industrial data flows — built to validate UNS schemas before
-          deploying to production.
+          industrial data flows — built to validate UNS schemas before deploying
+          to production.
         </p>
       </div>
       <ImageCarousel images={images} />

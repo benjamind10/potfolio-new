@@ -4,7 +4,7 @@ import FadeInWrapper from './common/FadeInWrapper';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-[#0f111a] border-t border-gray-200 dark:border-gray-700 mt-24">
+    <footer className="bg-gray-100 dark:bg-[#0f111a] border-t border-gray-200 dark:border-gray-700">
       <FadeInWrapper>
         <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-400">
           {/* Branding + Blurb */}
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-indigo-500 transition"
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             >
               <Github size={18} />
             </a>
@@ -36,14 +36,14 @@ const Footer: React.FC = () => {
               aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-indigo-500 transition"
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             >
               <Linkedin size={18} />
             </a>
             <a
               href="mailto:ben.duran@proton.me"
               aria-label="Email"
-              className="hover:text-indigo-500 transition"
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-indigo-400 hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 transition-all"
             >
               <Mail size={18} />
             </a>

@@ -25,7 +25,7 @@ const jobs = [
     title: 'Software Engineer II — Fuuz',
     dates: 'Nov 2024 – Jan 2025 · Remote',
     desc: 'Developed MES front-end modules and API integrations for production tracking and scheduling workflows.',
-    tags: ['TypeScript', 'React', 'MES', 'REST APIs'],
+    tags: ['TypeScript', 'React', 'MES', 'GraphQL APIs'],
   },
   {
     title: 'MI Solutions Specialist I — GPA',
